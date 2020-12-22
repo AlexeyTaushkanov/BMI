@@ -25,29 +25,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
-
-    /*public boolean onKey(View v, int keyCode, KeyEvent event) {
-        if(v.getId() == R.id.rost)
-        {
-            if(KeyEvent.KEYCODE_ENTER == keyCode)
-            {
-                if(rost1.getText().toString().equals("") || rost1.getText().toString().equals(null))
-                {
-                    imt.setText("Что то пошло не так");
-                    //Toast.makeText(KeyboardTestActivity.this, "Event Eaten", Toast.LENGTH_SHORT).show();
-                    Log.d("onKey", "Event Eaten");
-                    return true;
-                }
-            }
-        }
-        return false;
-    }*/
-
     public static double ocrug (double value, int stepen) {
         double scale = Math.pow(10, stepen);
         double valuefin = Math.ceil(value * scale) / scale;
         return valuefin;
+    }
+
+    private String getInterp(double fin) {
+        String interp;
+        if (fin < 18.5) {
+            interp = "Ниже нормального веса";
+        } else if ((fin >= 18.5) && (fin <= 25)) {
+            interp = "Нормальный вес";
+        } else if ((fin > 25) && (fin < 30)) {
+            interp = "Избыточный вес";
+        } else if ((fin >= 30) && (fin < 35)) {
+            interp = "Ожирение | степени";
+        } else if ((fin >= 35) && (fin < 40)) {
+            interp = "Ожирение || степени";
+        } else {
+            interp = "Ожирение ||| степени";
+        }
+        return interp;
     }
 
     public void onClickFindBeer(View view) {
@@ -83,24 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 "в пределах от " + form.format(minMass) + " до " + form.format(maxMass) + " кг");
 
 
-    }
-
-    private String getInterp(double fin) {
-        String interp;
-        if (fin < 18.5) {
-            interp = "Ниже нормального веса";
-        } else if ((fin >= 18.5) && (fin <= 25)) {
-            interp = "Нормальный вес";
-        } else if ((fin > 25) && (fin < 30)) {
-            interp = "Избыточный вес";
-        } else if ((fin >= 30) && (fin < 35)) {
-            interp = "Ожирение | степени";
-        } else if ((fin >= 35) && (fin < 40)) {
-            interp = "Ожирение || степени";
-        } else {
-            interp = "Ожирение ||| степени";
-        }
-        return interp;
     }
 
     public void onClickClear(View view) {
