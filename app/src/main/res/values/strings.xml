@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Индекс массы тела</string>
+    <string name="growth">Рост, см</string>
+    <string name="weight">Вес, кг</string>
+    <string name="calculate">Расчитать</string>
+    <string name="clear">Отчистить</string>
+</resources>
