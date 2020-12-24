@@ -51,37 +51,48 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickFindBeer(View view) {
 
-        String interp;
-
         EditText growth = (EditText) findViewById(R.id.rost);
-        String rost1 = growth.getText().toString();
-        double rost2 = Double.parseDouble(rost1);
 
         EditText weight = (EditText) findViewById(R.id.mass);
-        String mass1 = weight.getText().toString();
-        double mass2 = Double.parseDouble(mass1);
 
-        TextView imt = (TextView) findViewById(R.id.imt);
+        if (growth.getText().toString().length() == 0 && weight.getText().toString().length() == 0){
+            growth.setError( "Введите свой рост в см." );
+            weight.setError("Введите свой вес в кг.");
+        } if (weight.getText().toString().length() == 0) {
+            weight.setError("Введите свой вес в кг.");
+        } if (growth.getText().toString().length() == 0) {
+            growth.setError( "Введите свой рост в см." );
+        } else {
 
-        DecimalFormat df = new DecimalFormat("##.#");
-        DecimalFormat form = new DecimalFormat("###.#");
+            String interp;
 
-        double rost3 = rost2/100;
+            String rost1 = growth.getText().toString();
+            double rost2 = Double.parseDouble(rost1);
 
-        double fin0 = (mass2 / (rost3 * rost3));
-        double fin = ocrug(fin0, 1);
+            String mass1 = weight.getText().toString();
+            double mass2 = Double.parseDouble(mass1);
 
-        double minMass = (18.5*rost3*rost3);
-        double maxMass = (25*rost3*rost3);
+            TextView imt = (TextView) findViewById(R.id.imt);
 
-        Log.d("Progress changed: ", "" + fin + " fin " + minMass);
+            DecimalFormat df = new DecimalFormat("##.#");
+            DecimalFormat form = new DecimalFormat("###.#");
 
-        interp = getInterp(fin);
+            double rost3 = rost2/100;
 
-        imt.setText("Индекс массы тела: " + fin + " - " + interp + "\nНормальный вес при росте " + form.format(rost2) + " см должен находится " +
-                "в пределах от " + form.format(minMass) + " до " + form.format(maxMass) + " кг");
+            double fin0 = (mass2 / (rost3 * rost3));
+            double fin = ocrug(fin0, 1);
 
+            double minMass = (18.5*rost3*rost3);
+            double maxMass = (25*rost3*rost3);
 
+            Log.d("Progress changed: ", "" + fin + " fin " + minMass);
+
+            interp = getInterp(fin);
+
+            imt.setText("Индекс массы тела: " + fin + " - " + interp + "\nНормальный вес при росте " + form.format(rost2) + " см должен находится " +
+                    "в пределах от " + form.format(minMass) + " до " + form.format(maxMass) + " кг");
+
+        }
     }
 
     public void onClickClear(View view) {
@@ -96,8 +107,5 @@ public class MainActivity extends AppCompatActivity {
         imt.setText("");
 
     }
-
-  /*  int l = growth.getText().toString().trim().length();
-    .setClickable(l == 0 ? false: true);*/
 
 }
