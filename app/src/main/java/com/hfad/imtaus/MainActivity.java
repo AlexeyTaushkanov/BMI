@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
         if (growth.getText().toString().length() == 0 && weight.getText().toString().length() == 0){
             growth.setError( "Введите свой рост в см." );
             weight.setError("Введите свой вес в кг.");
-        } if (weight.getText().toString().length() == 0) {
+        } else if (weight.getText().toString().length() == 0) {
             weight.setError("Введите свой вес в кг.");
-        } if (growth.getText().toString().length() == 0) {
+        } else if (growth.getText().toString().length() == 0) {
             growth.setError( "Введите свой рост в см." );
         } else {
 
