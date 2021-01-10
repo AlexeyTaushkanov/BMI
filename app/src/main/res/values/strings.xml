@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">Индекс массы тела</string>
-    <string name="growth">Рост, см</string>
-    <string name="weight">Вес, кг</string>
-    <string name="calculate">Расчитать</string>
-    <string name="clear">Отчистить</string>
+    <string name="growthTextView">Рост, см</string>
+    <string name="growthEditText">Рост, см</string>
+    <string name="weightTextView">Вес, кг</string>
+    <string name="weightEditText">Вес, кг</string>
+    <string name="calculationButton">Расчитать</string>
+    <string name="clearButton">Отчистить</string>
+    <string name="underWeight">Ниже нормального веса</string>
+    <string name="normalWeight">Нормальный вес</string>
+    <string name="preObesity">Избыточный вес</string>
+    <string name="obesityClass1">Ожирение | степени</string>
+    <string name="obesityClass2">Ожирение || степени</string>
+    <string name="obesityClass3">Ожирение ||| степени</string>
+    <string name="enterGrowth">Введите свой рост в см.</string>
+    <string name="enterWeight">Введите свой вес в кг.</string>
 </resources>
