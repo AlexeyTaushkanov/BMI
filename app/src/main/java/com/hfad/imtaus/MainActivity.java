@@ -17,6 +17,12 @@ public class MainActivity extends AppCompatActivity {
     EditText weightEditText;
     TextView outputDataTextView;
     String textIMT;
+    double growthCm;
+    double massKg;
+    double growthMetre;
+    double BMI;
+    double minBodyMassKg;
+    double maxBodyMassKg;
 
     double minBodyMassCoefficient = 18.5;
     double maxBodyMassCoefficient = 25;
@@ -30,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
         growthEditText = (EditText) findViewById(R.id.growthEditText);
         weightEditText = (EditText) findViewById(R.id.weightEditText);
         outputDataTextView = (TextView) findViewById(R.id.outputDataTextView);
+
+        if (savedInstanceState != null) {
+            touchButtonBMI = savedInstanceState.getBoolean("touchButtonBMI");
+            outputTextBMI = savedInstanceState.getString("outputTextBMI");
+        }
+
+        if (touchButtonBMI) {
+            outputDataTextView.setText(outputTextBMI);
+        }
 
     }
 
@@ -72,34 +87,37 @@ public class MainActivity extends AppCompatActivity {
             growthEditText.setError(getString(R.string.enterGrowth));
         } else {
 
-            double growthCm = Double.parseDouble(growthEditText.getText().toString());
+            growthCm = Double.parseDouble(growthEditText.getText().toString());
 
-            double massKg = Double.parseDouble(weightEditText.getText().toString());
+            massKg = Double.parseDouble(weightEditText.getText().toString());
 
-            double growthMetre = growthCm/100;
+            growthMetre = growthCm/100;
 
-            double BMI = rounding((massKg / (growthMetre * growthMetre)), 1);
+            BMI = rounding((massKg / (growthMetre * growthMetre)), 1);
 
-            double minBodyMassKg = (minBodyMassCoefficient*growthMetre*growthMetre);
-            double maxBodyMassKg = (maxBodyMassCoefficient*growthMetre*growthMetre);
+            minBodyMassKg = (minBodyMassCoefficient*growthMetre*growthMetre);
+            maxBodyMassKg = (maxBodyMassCoefficient*growthMetre*growthMetre);
 
-           Log.d("Progress changed: ", "" + BMI + " fin " + minBodyMassKg + "massKg" + massKg + "growthMetre" + growthMetre);
+          // Log.d("Progress changed: ", "" + BMI + " fin " + minBodyMassKg + "massKg" + massKg + "growthMetre" + growthMetre);
 
             textIMT = getBMI (BMI);
 
-                outputTextBMI = ("Индекс массы тела: " + BMI + " - " + textIMT + "\nНормальный вес при росте " +
-                        form2.format(growthCm) + " см должен находится в пределах от " + form1.format(minBodyMassKg) +
-                        " до " + form1.format(maxBodyMassKg) + " кг");
+            outputTextBMI = ("Индекс массы тела: " + BMI + " - " + textIMT + "\nНормальный вес при росте " +
+                    form2.format(growthCm) + " см должен находится в пределах от " + form1.format(minBodyMassKg) +
+                    " до " + form1.format(maxBodyMassKg) + " кг");
 
                 outputDataTextView.setText(outputTextBMI);
 
             }
         }
 
+
+
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        //savedInstanceState.putInt("seconds", seconds);
+        savedInstanceState.putBoolean("touchButtonBMI", touchButtonBMI);
+        savedInstanceState.putString("outputTextBMI", outputTextBMI);
     }
 
     public void onClickClear(View view) {
@@ -109,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         weightEditText.getText().clear();
 
         outputDataTextView.setText("");
+
+        touchButtonBMI = false;
 
     }
 
