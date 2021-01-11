@@ -12,11 +12,15 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    String finagling;
+    String outputTextBMI;
     EditText growthEditText;
     EditText weightEditText;
     TextView outputDataTextView;
     String textIMT;
+
+    double minBodyMassCoefficient = 18.5;
+    double maxBodyMassCoefficient = 25;
+    boolean touchButtonBMI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +33,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static double rounding (double value, int degree) {
-        double scale = Math.pow(10, degree);
+    DecimalFormat form1 = new DecimalFormat(".#");
+    DecimalFormat form2 = new DecimalFormat("#");
+
+    public static double rounding (double value, int afterPoint) {
+        double scale = Math.pow(10, afterPoint);
         return Math.ceil(value * scale) / scale;
     }
 
-    private String getIMT(double imt) {
+    private String getBMI(double BMI) {
         String textIMT;
-        if (imt < 18.5) {
+        if (BMI < 18.5) {
             textIMT = getString(R.string.underWeight);
-        } else if ((imt >= 18.5) && (imt <= 25)) {
+        } else if ((BMI >= 18.5) && (BMI <= 25)) {
             textIMT = getString(R.string.normalWeight);
-        } else if ((imt > 25) && (imt < 30)) {
+        } else if ((BMI > 25) && (BMI < 30)) {
             textIMT = getString(R.string.preObesity);
-        } else if ((imt >= 30) && (imt < 35)) {
+        } else if ((BMI >= 30) && (BMI < 35)) {
             textIMT = getString(R.string.obesityClass1);
-        } else if ((imt >= 35) && (imt < 40)) {
+        } else if ((BMI >= 35) && (BMI < 40)) {
             textIMT = getString(R.string.obesityClass2);
         } else {
             textIMT = getString(R.string.obesityClass3);
@@ -52,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
         return textIMT;
     }
 
-    public void onClickFindBeer(View view) {
+    public void onClickFindBMI(View view) {
+
+        touchButtonBMI = true;
 
         if (growthEditText.getText().toString().length() == 0 && weightEditText.getText().toString().length() == 0){
             growthEditText.setError(getString(R.string.enterGrowth));
@@ -62,34 +71,36 @@ public class MainActivity extends AppCompatActivity {
         } else if (growthEditText.getText().toString().length() == 0) {
             growthEditText.setError(getString(R.string.enterGrowth));
         } else {
-            String rost1 = growthEditText.getText().toString();
-            double rost2 = Double.parseDouble(rost1);
 
-            String mass1 = weightEditText.getText().toString();
-            double mass2 = Double.parseDouble(mass1);
+            double growthCm = Double.parseDouble(growthEditText.getText().toString());
 
-            TextView outputDataTextView = (TextView) findViewById(R.id.outputDataTextView);
+            double massKg = Double.parseDouble(weightEditText.getText().toString());
 
-            DecimalFormat form = new DecimalFormat(".#");
+            double growthMetre = growthCm/100;
 
-            double rost3 = rost2/100;
+            double BMI = rounding((massKg / (growthMetre * growthMetre)), 1);
 
-            double imt = rounding((mass2 / (rost3 * rost3)), 1);
+            double minBodyMassKg = (minBodyMassCoefficient*growthMetre*growthMetre);
+            double maxBodyMassKg = (maxBodyMassCoefficient*growthMetre*growthMetre);
 
-            double minMass = (18.5*rost3*rost3);
-            double maxMass = (25*rost3*rost3);
+           Log.d("Progress changed: ", "" + BMI + " fin " + minBodyMassKg + "massKg" + massKg + "growthMetre" + growthMetre);
 
-           // Log.d("Progress changed: ", "" + imt + " fin " + minMass);
+            textIMT = getBMI (BMI);
 
-            textIMT = getIMT(imt);
+                outputTextBMI = ("Индекс массы тела: " + BMI + " - " + textIMT + "\nНормальный вес при росте " +
+                        form2.format(growthCm) + " см должен находится в пределах от " + form1.format(minBodyMassKg) +
+                        " до " + form1.format(maxBodyMassKg) + " кг");
 
-            finagling = ("Индекс массы тела: " + imt + " - " + textIMT + "\nНормальный вес при росте " + form.format(rost2) + " см должен находится " +
-                    "в пределах от " + form.format(minMass) + " до " + form.format(maxMass) + " кг");
-
-            outputDataTextView.setText(finagling);
+                outputDataTextView.setText(outputTextBMI);
 
             }
         }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        //savedInstanceState.putInt("seconds", seconds);
+    }
 
     public void onClickClear(View view) {
 
