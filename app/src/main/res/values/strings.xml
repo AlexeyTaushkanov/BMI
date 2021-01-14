@@ -4,8 +4,8 @@
     <string name="growthEditText">Рост, см</string>
     <string name="weightTextView">Вес, кг</string>
     <string name="weightEditText">Вес, кг</string>
-    <string name="calculationButton">Расчитать</string>
-    <string name="clearButton">Отчистить</string>
+    <string name="calculationButton">Р а с ч и т а т ь</string>
+    <string name="clearButton">О т ч и с т и т ь</string>
     <string name="underWeight">Ниже нормального веса</string>
     <string name="normalWeight">Нормальный вес</string>
     <string name="preObesity">Избыточный вес</string>
