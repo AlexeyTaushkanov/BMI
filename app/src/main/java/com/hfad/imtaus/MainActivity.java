@@ -111,15 +111,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putBoolean("touchButtonBMI", touchButtonBMI);
-        savedInstanceState.putString("outputTextBMI", outputTextBMI);
-    }
-
     public void onClickClear(View view) {
 
         growthEditText.getText().clear();
@@ -130,6 +121,13 @@ public class MainActivity extends AppCompatActivity {
 
         touchButtonBMI = false;
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean("touchButtonBMI", touchButtonBMI);
+        savedInstanceState.putString("outputTextBMI", outputTextBMI);
     }
 
 }
