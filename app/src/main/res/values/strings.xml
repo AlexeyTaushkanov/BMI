@@ -14,4 +14,8 @@
     <string name="obesityClass3">Ожирение ||| степени</string>
     <string name="enterGrowth">Введите свой рост в см.</string>
     <string name="enterWeight">Введите свой вес в кг.</string>
+    <string name="action_info">Информация</string>
+    <string name="action_more">Больше</string>
+    <string name="action_history">История</string>
+    <string name="action_share">Поделиться приложением</string>
 </resources>

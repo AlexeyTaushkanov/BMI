@@ -2,15 +2,22 @@ package com.hfad.imtaus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ShareActionProvider shareActionProvider;
 
     String outputTextBMI;
     EditText growthEditText;
@@ -47,6 +54,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_info:
+                /*openSearch();*/
+                return true;
+            case R.id.action_history:
+                /*openSettings();*/
+                return true;
+            case R.id.action_more:
+                Intent intent = new Intent(this, MoreActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
     DecimalFormat form1 = new DecimalFormat(".#");
     DecimalFormat form2 = new DecimalFormat("#");
