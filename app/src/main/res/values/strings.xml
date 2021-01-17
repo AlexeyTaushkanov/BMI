@@ -5,7 +5,7 @@
     <string name="weightTextView">Вес, кг</string>
     <string name="weightEditText">Вес, кг</string>
     <string name="calculationButton">Р а с ч и т а т ь</string>
-    <string name="clearButton">О т ч и с т и т ь</string>
+    <string name="clearButton">О ч и с т и т ь</string>
     <string name="underWeight">Ниже нормального веса</string>
     <string name="normalWeight">Нормальный вес</string>
     <string name="preObesity">Избыточный вес</string>
@@ -15,7 +15,13 @@
     <string name="enterGrowth">Введите свой рост в см.</string>
     <string name="enterWeight">Введите свой вес в кг.</string>
     <string name="action_info">Информация</string>
-    <string name="action_more">Больше</string>
+    <string name="action_more">Другое</string>
     <string name="action_history">История</string>
     <string name="action_share">Поделиться приложением</string>
+    <string name="description">Описание</string>
+    <string name="good">Х о р о ш о</string>
+    <string name="description_BMI">Индекс массы тела — величина, позволяющая оценить степень соответствия массы человека и его роста и тем самым косвенно судить о том, является ли масса недостаточной, нормальной или избыточной.</string>
+    <string name="zoneUnderWeight">&#60; 18.5</string>
+    <string name="zoneObesityClass3">&#62; 40</string>
+    <string name="measurementResults">Результаты измерения</string>
 </resources>
