@@ -1,6 +1,8 @@
 package com.hfad.imtaus;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.app.DialogFragment;
 import android.view.View.OnClickListener;
@@ -23,7 +24,7 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ShareActionProvider shareActionProvider;
+    private ShareActionProvider _shareActionProvider;
 
     DialogFragment _dlg;
 
@@ -69,9 +70,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_actions, menu);
+        getMenuInflater().inflate(R.menu.main_activity_actions, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        _shareActionProvider = (androidx.appcompat.widget.ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        setIntent("ИМТ Калькулятор App: https://play.google.com/store/apps/details?id=ru.medsoftpro.bmicalc");
         return super.onCreateOptionsMenu(menu);
+    }
+
+
+    /*Intent sendIntent = new Intent();
+sendIntent.setAction(Intent.ACTION_SEND);
+sendIntent.putExtra(Intent.EXTRA_TEXT, "Приложение name, скачивай от сюда - ссылка");
+sendIntent.setType("text/plain");
+    startActivity(Intent.createChooser(sendIntent,"Поделиться"));*/
+
+    private void setIntent(String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        Intent.createChooser(intent,"Поделиться");
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        _shareActionProvider.setShareIntent(intent);
     }
 
     @Override
@@ -164,6 +182,21 @@ public class MainActivity extends AppCompatActivity {
         _outputDataTextView.setText("");
         _touchButtonBMI = false;
     }
+   /* @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate menu resource file.
+        getMenuInflater().inflate(R.menu.main_activity_actions, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        MenuItem item = menu.findItem(R.id.action_share);
+
+        // Fetch and store ShareActionProvider
+        _shareActionProvider = (ShareActionProvider) item.getActionProvider();
+
+        // Return true to display menu
+        return true;
+    }*/
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -171,5 +204,4 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putBoolean("_touchButtonBMI", _touchButtonBMI);
         savedInstanceState.putString("_outputTextBMI", _outputTextBMI);
     }
-
 }

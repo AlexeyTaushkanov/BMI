@@ -24,4 +24,7 @@
     <string name="zoneUnderWeight">&#60; 18.5</string>
     <string name="zoneObesityClass3">&#62; 40</string>
     <string name="measurementResults">Результаты измерения</string>
+    <string name="aboutUs">О нас</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
