@@ -27,4 +27,6 @@
     <string name="aboutUs">О нас</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="aboutUsDescriotion">Привет, меня зовут Алексей. Занимаюсь созданием приложений для
+        здоровья и развития. Санимаюсь спортом, путешествую и ...(все остальное instagram)</string>
 </resources>

@@ -84,7 +84,7 @@ sendIntent.putExtra(Intent.EXTRA_TEXT, "Приложение name, скачив�
 sendIntent.setType("text/plain");
     startActivity(Intent.createChooser(sendIntent,"Поделиться"));*/
 
-    private void setIntent(String text) {
+    public void setIntent(String text) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         Intent.createChooser(intent,"Поделиться");
         intent.setType("text/plain");
