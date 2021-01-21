@@ -1,5 +1,8 @@
 package com.hfad.imtaus;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,13 +10,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AboutUsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AboutUsFragment extends Fragment {
+public class AboutUsFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +63,35 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_us, container, false);
+        View view = inflater.inflate(R.layout.fragment_about_us,
+                container, false);
+
+        Button linkInstButton = (Button)view.findViewById(R.id.linkInstagram);
+        linkInstButton.setOnClickListener(this);
+
+        return view;
     }
+
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.linkInstagram:
+                onClickLinkInstagram(v);
+                break;
+        }
+    }
+
+    public void onClickLinkInstagram(View view) {
+        Uri uri = Uri.parse("https://www.instagram.com/taushkanov_soul/");
+        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+        likeIng.setPackage("com.instagram.android");
+
+        try {
+            startActivity(likeIng);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.instagram.com/taushkanov_soul/")));
+        }
+    }
+
 }

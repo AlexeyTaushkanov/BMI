@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
     double _minBodyMassKg;
     double _maxBodyMassKg;
 
-    double _minBodyMassCoefficient = 18.5;
-    double _maxBodyMassCoefficient = 25;
+    static double _minBodyMassCoefficient = 18.5;
+    static double _maxBodyMassCoefficient = 25;
     boolean _touchButtonBMI;
 
-    DecimalFormat _form1 = new DecimalFormat(".#");
-    DecimalFormat _form2 = new DecimalFormat("#");
+    static DecimalFormat _form1 = new DecimalFormat(".#");
+    static DecimalFormat _form2 = new DecimalFormat("#");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

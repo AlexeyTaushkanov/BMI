@@ -1,14 +1,17 @@
 package com.hfad.imtaus;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +19,22 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class MoreFragment extends Fragment implements View.OnClickListener {
+
+    public interface onSomeEventListener {
+        public void someEvent();
+    }
+
+    onSomeEventListener someEventListener;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            someEventListener = (onSomeEventListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onSomeEventListener");
+        }
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,6 +86,14 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
         Button shareButton = (Button)view.findViewById(R.id.shareButton);
         shareButton.setOnClickListener(this);
 
+        Button button = (Button) view.findViewById(R.id.aboutUsButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                someEventListener.someEvent();
+                Log.d("Progress changed: ", "Button click in aboutUsButton");
+            }
+        });
+
         return view;
     }
 
@@ -87,9 +114,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
         startActivity(Intent.createChooser(sendIntent,"Поделиться"));
     }
 
-    public void onClickAboutUs(View view) {
 
-    }
 
 }
 
